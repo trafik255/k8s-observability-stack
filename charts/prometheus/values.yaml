@@ -1,0 +1,8 @@
+alertmanager:
+  enabled: true
+
+server:
+  retention: 15d
+
+service:
+  type: ClusterIP
