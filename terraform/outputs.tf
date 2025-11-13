@@ -9,3 +9,5 @@ output "cluster_endpoint" {
 output "grafana_url" {
   value = "http://grafana.observability.svc.cluster.local"
 }
+
+# Output the Prometheus URL
