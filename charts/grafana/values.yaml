@@ -1,0 +1,21 @@
+adminUser: admin
+adminPassword: admin
+
+service:
+  type: ClusterIP
+
+persistence:
+  enabled: false
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server
+        access: proxy
+      - name: Loki
+        type: loki
+        url: http://loki:3100
+        access: proxy

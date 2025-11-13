@@ -1,0 +1,14 @@
+loki:
+  auth_enabled: false
+
+deploymentMode: SingleBinary
+
+singleBinary:
+  replicas: 1
+
+ingester:
+  chunk_idle_period: 5m
+  max_chunk_age: 1h
+
+persistence:
+  enabled: false

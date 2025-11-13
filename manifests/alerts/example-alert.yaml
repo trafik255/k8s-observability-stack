@@ -1,0 +1,11 @@
+groups:
+  - name: example-alerts
+    rules:
+      - alert: ExampleHighCPU
+        expr: sum(rate(container_cpu_usage_seconds_total[5m])) > 0.8
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          description: "Example alert for high CPU"
+          summary: "CPU usage is high"
