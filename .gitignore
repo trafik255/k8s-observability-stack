@@ -1,0 +1,38 @@
+cat > .gitignore << 'EOF'
+# Terraform
+.terraform/
+**/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*.tfvars
+*.tfvars.json
+
+# Helm artifacts
+charts/**/charts/
+charts/**/tmp/
+charts/**/Chart.lock
+
+# Kubernetes junk
+*.orig
+*.backup
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# macOS
+.DS_Store
+
+# JetBrains IDE
+.idea/
+*.iml
+
+# Logs
+logs/
+*.log
+EOF
