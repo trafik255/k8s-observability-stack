@@ -62,7 +62,11 @@ resource "helm_release" "prometheus" {
   namespace = kubernetes_namespace.observability.metadata[0].name
 
   values = [
-    file("${path.module}/../manifests/values-prometheus.yaml")
+    file("${path.module}/../charts/prometheus/values.yaml")
+  ]
+
+  depends_on = [
+    kubernetes_namespace.observability
   ]
 }
 
@@ -76,6 +80,14 @@ resource "helm_release" "loki" {
   version    = "6.6.3"
 
   namespace = kubernetes_namespace.observability.metadata[0].name
+
+  values = [
+    file("${path.module}/../charts/loki/values.yaml")
+  ]
+
+  depends_on = [
+    kubernetes_namespace.observability
+  ]
 }
 
 #############################################
@@ -90,23 +102,31 @@ resource "helm_release" "grafana" {
   namespace = kubernetes_namespace.observability.metadata[0].name
 
   values = [
-    file("${path.module}/../manifests/values-grafana.yaml")
+    file("${path.module}/../charts/grafana/values.yaml")
+  ]
+
+  depends_on = [
+    kubernetes_namespace.observability
   ]
 }
 
 #############################################
 # Helm: Promtail
 #############################################
-
 resource "helm_release" "promtail" {
   name       = "promtail"
-  namespace  = "observability"
   repository = "https://grafana.github.io/helm-charts"
   chart      = "promtail"
-  version    = "6.15.5" # or similar stable version
+  version    = "6.15.5"
+
+  namespace = kubernetes_namespace.observability.metadata[0].name
 
   values = [
     file("${path.module}/../charts/promtail/values.yaml")
+  ]
+
+  depends_on = [
+    kubernetes_namespace.observability
   ]
 }
 
@@ -115,12 +135,17 @@ resource "helm_release" "promtail" {
 #############################################
 resource "helm_release" "tempo" {
   name       = "tempo"
-  namespace  = "observability"
   repository = "https://grafana.github.io/helm-charts"
   chart      = "tempo"
-  version    = "1.7.0" # pick a stable version
+  version    = "1.7.0"
+
+  namespace = kubernetes_namespace.observability.metadata[0].name
 
   values = [
     file("${path.module}/../charts/tempo/values.yaml")
+  ]
+
+  depends_on = [
+    kubernetes_namespace.observability
   ]
 }
