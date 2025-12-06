@@ -1,6 +1,3 @@
-adminUser: admin
-adminPassword: admin
-
 admin:
   existingSecret: grafana-admin-secret
   userKey: admin-user
