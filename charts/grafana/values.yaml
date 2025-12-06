@@ -1,6 +1,11 @@
 adminUser: admin
 adminPassword: admin
 
+admin:
+  existingSecret: grafana-admin-secret
+  userKey: admin-user
+  passwordKey: admin-password
+
 service:
   type: ClusterIP
 
@@ -13,9 +18,15 @@ datasources:
     datasources:
       - name: Prometheus
         type: prometheus
-        url: http://prometheus-server
         access: proxy
+        url: http://prometheus-server.observability.svc.cluster.local
+        isDefault: true
       - name: Loki
         type: loki
-        url: http://loki:3100
         access: proxy
+        url: http://loki.observability.svc.cluster.local:3100
+      - name: Tempo
+        type: tempo
+        access: proxy
+        url: http://tempo.observability.svc.cluster.local:3100
+

@@ -93,3 +93,34 @@ resource "helm_release" "grafana" {
     file("${path.module}/../manifests/values-grafana.yaml")
   ]
 }
+
+#############################################
+# Helm: Promtail
+#############################################
+
+resource "helm_release" "promtail" {
+  name       = "promtail"
+  namespace  = "observability"
+  repository = "https://grafana.github.io/helm-charts"
+  chart      = "promtail"
+  version    = "6.15.5" # or similar stable version
+
+  values = [
+    file("${path.module}/../charts/promtail/values.yaml")
+  ]
+}
+
+#############################################
+# Helm: Tempo
+#############################################
+resource "helm_release" "tempo" {
+  name       = "tempo"
+  namespace  = "observability"
+  repository = "https://grafana.github.io/helm-charts"
+  chart      = "tempo"
+  version    = "1.7.0" # pick a stable version
+
+  values = [
+    file("${path.module}/../charts/tempo/values.yaml")
+  ]
+}

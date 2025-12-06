@@ -1,0 +1,14 @@
+tempo:
+  searchEnabled: true
+
+distributor:
+  replicas: 1
+
+ingester:
+  replicas: 1
+
+storage:
+  trace:
+    backend: local
+    wal:
+      enabled: true
